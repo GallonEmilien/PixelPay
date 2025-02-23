@@ -1,7 +1,7 @@
 package fr.gallonemilien.block
 
-import fr.gallonemilien.RoyalMoney.Companion.MOD_ID
-import fr.gallonemilien.item.MoneyItems
+import fr.gallonemilien.PixelPay.Companion.MOD_ID
+import fr.gallonemilien.item.PixelPayItems
 import net.minecraft.block.Block
 import net.minecraft.item.BlockItem
 import net.minecraft.item.Item
@@ -15,7 +15,7 @@ object MoneyBlocks {
 
     private fun <T : Block> register(path: String, block: T): T {
         Registry.register(Registries.BLOCK, Identifier.of(MOD_ID, path), block)
-        MoneyItems.register(path,BlockItem(block, Item.Settings()))
+        PixelPayItems.register(path,BlockItem(block, Item.Settings()))
         return block
     }
 }

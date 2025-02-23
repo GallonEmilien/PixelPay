@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": {"model":  "pixelpay:block/atm"},
+    "facing=east": {"model":  "pixelpay:block/atm", "y": 90},
+    "facing=south": {"model":  "pixelpay:block/atm", "y": 180},
+    "facing=west": {"model":  "pixelpay:block/atm", "y":  270}
+  }
+}

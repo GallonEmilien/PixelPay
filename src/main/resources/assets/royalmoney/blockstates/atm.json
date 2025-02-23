@@ -1,8 +1,0 @@
-{
-  "variants": {
-    "facing=north": {"model":  "royalmoney:block/atm"},
-    "facing=east": {"model":  "royalmoney:block/atm", "y": 90},
-    "facing=south": {"model":  "royalmoney:block/atm", "y": 180},
-    "facing=west": {"model":  "royalmoney:block/atm", "y":  270}
-  }
-}

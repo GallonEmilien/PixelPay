@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "royalmoney:item/boucki_coin"
+    "layer0": "pixelpay:item/diamond_coin"
   }
 }

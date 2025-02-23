@@ -2,20 +2,20 @@ package fr.gallonemilien
 
 import fr.gallonemilien.block.MoneyBlocks
 import fr.gallonemilien.block.MoneyBlocksEntityTypes
-import fr.gallonemilien.item.MoneyItems
-import fr.gallonemilien.item.RoyalMoneyItemGroup
+import fr.gallonemilien.item.PixelPayItems
+import fr.gallonemilien.item.PixelPayItemGroup
 import net.fabricmc.api.ModInitializer
 
 
-class RoyalMoney : ModInitializer {
+class PixelPay : ModInitializer {
 	companion object {
-		const val MOD_ID = "royalmoney"
+		const val MOD_ID = "pixelpay"
 	}
 
 	override fun onInitialize() {
-		MoneyItems
+		PixelPayItems
 		MoneyBlocks
 		MoneyBlocksEntityTypes
-		RoyalMoneyItemGroup.initialize()
+		PixelPayItemGroup.initialize()
 	}
 }

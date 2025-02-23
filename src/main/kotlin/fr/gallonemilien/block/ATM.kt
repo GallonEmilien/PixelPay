@@ -1,12 +1,12 @@
 package fr.gallonemilien.block
 
+
 import com.mojang.serialization.MapCodec
 import net.minecraft.block.*
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.BlockEntityTicker
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.item.ItemPlacementContext
-import net.minecraft.sound.SoundEvents
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.DirectionProperty
 import net.minecraft.state.property.Properties
@@ -49,11 +49,11 @@ class ATM : BlockWithEntity(Settings.create().solid()), BlockEntityProvider {
         createCodec { ATM() }
 
     override fun createBlockEntity(pos: BlockPos?, state: BlockState?): BlockEntity? =
-        pos?.let { p -> state?.let { s -> ATMEntityType(p,s) } }
+        pos?.let { p -> state?.let { s -> ATMEntity(p,s) } }
 
     override fun <T : BlockEntity> getTicker(world: World, state: BlockState, type: BlockEntityType<T>): BlockEntityTicker<T>? {
         return validateTicker(type, MoneyBlocksEntityTypes.ATM_BLOCK_ENTITY) { world, pos, state, entity ->
-            entity.tick(world, pos, state, entity as ATMEntityType)
+            entity.tick(world, pos, state, entity as ATMEntity)
         }
     }
 
@@ -68,12 +68,4 @@ class ATM : BlockWithEntity(Settings.create().solid()), BlockEntityProvider {
     override fun getRenderType(state: BlockState?): BlockRenderType =
         BlockRenderType.MODEL
 
-}
-
-class ATMEntityType(pos: BlockPos, state: BlockState) : BlockEntity(MoneyBlocksEntityTypes.ATM_BLOCK_ENTITY, pos, state) {
-    fun tick(world: World?, blockPos: BlockPos?, blockState: BlockState?, atmEntityType: ATMEntityType?) {
-        world?.players?.forEach {
-            it.playSound(SoundEvents.BLOCK_LAVA_POP)
-        }
-    }
 }

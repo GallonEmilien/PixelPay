@@ -1,5 +1,3 @@
 package fr.gallonemilien.item.coin
 
-class GoldCoin : Coin() {
-
-}
+class GoldCoin : Coin()

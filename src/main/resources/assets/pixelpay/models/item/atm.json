@@ -2,10 +2,10 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [4, 4],
 	"textures": {
-		"0": "royalmoney:block/andesite_casing",
-		"1": "royalmoney:block/gui",
-		"2": "royalmoney:block/card",
-		"particle": "royalmoney:block/andesite_casing"
+		"0": "pixelpay:block/andesite_casing",
+		"1": "pixelpay:block/gui",
+		"2": "pixelpay:block/card",
+		"particle": "pixelpay:block/andesite_casing"
 	},
 	"elements": [
 		{

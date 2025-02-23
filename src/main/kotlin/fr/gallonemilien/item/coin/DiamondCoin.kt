@@ -1,4 +1,3 @@
 package fr.gallonemilien.item.coin
 
-class DiamondCoin: Coin() {
-}
+class DiamondCoin: Coin()

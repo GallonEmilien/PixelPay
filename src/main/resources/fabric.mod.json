@@ -1,37 +1,37 @@
 {
 	"schemaVersion": 1,
-	"id": "royalmoney",
+	"id": "pixelpay",
 	"version": "${version}",
-	"name": "RoyalMoney",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"name": "PixelPay",
+	"description": "Enhance your server economy !",
 	"authors": [
-		"Me!"
+		"GallonEmilien"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://github.com/GallonEmilien",
+		"sources": "https://github.com/GallonEmilien/PixelPay"
 	},
 	"license": "CC0-1.0",
-	"icon": "assets/royalmoney/icon.png",
+	"icon": "assets/pixelpay/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
 			{
-				"value": "fr.gallonemilien.RoyalMoney",
+				"value": "fr.gallonemilien.PixelPay",
 				"adapter": "kotlin"
 			}
 		],
 		"client": [
 			{
-				"value": "fr.gallonemilien.RoyalMoneyClient",
+				"value": "fr.gallonemilien.PixelPayClient",
 				"adapter": "kotlin"
 			}
 		]
 	},
 	"mixins": [
-		"royalmoney.mixins.json",
+		"pixelpay.mixins.json",
 		{
-			"config": "royalmoney.client.mixins.json",
+			"config": "pixelpay.client.mixins.json",
 			"environment": "client"
 		}
 	],
