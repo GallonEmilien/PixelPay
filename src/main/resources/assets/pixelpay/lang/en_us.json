@@ -5,5 +5,6 @@
   "item.pixelpay.diamond_coin": "Diamond coin",
   "item.pixelpay.emerald_coin": "Emerald Coin",
   "item.pixelpay.boucki_coin": "Bouckoin",
-  "block.pixelpay.atm": "ATM"
+  "block.pixelpay.atm": "ATM",
+  "container.pixelpay.money_pres": "Money Press"
 }

@@ -5,5 +5,6 @@
   "item.pixelpay.diamond_coin": "Pièce de diamant",
   "item.pixelpay.emerald_coin": "Pièce d'émeraude",
   "item.pixelpay.boucki_coin": "Bouckoin",
-  "block.pixelpay.atm": "Distributeur automatique"
+  "block.pixelpay.atm": "Distributeur automatique",
+  "container.pixelpay.money_pres": "Money Press"
 }
