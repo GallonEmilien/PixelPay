@@ -18,6 +18,7 @@ object PixelPayItemGroup {
         .entries { displayContext, entries ->
             entries.addAll(pixelPayItems.map { it.defaultStack })
             entries.add(MoneyBlocks.ATM_BLOCK.asItem().defaultStack.copy().apply { count = 1 })
+            entries.add(MoneyBlocks.MONEY_PRESS.asItem().defaultStack.copy().apply { count = 1 })
         }
         .build()
 

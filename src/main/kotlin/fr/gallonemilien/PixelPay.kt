@@ -1,7 +1,7 @@
 package fr.gallonemilien
 
 import fr.gallonemilien.block.MoneyBlocks
-import fr.gallonemilien.block.MoneyBlocksEntityTypes
+import fr.gallonemilien.block.entity.MoneyBlocksEntities
 import fr.gallonemilien.item.PixelPayItems
 import fr.gallonemilien.item.PixelPayItemGroup
 import net.fabricmc.api.ModInitializer
@@ -13,9 +13,9 @@ class PixelPay : ModInitializer {
 	}
 
 	override fun onInitialize() {
-		PixelPayItems
 		MoneyBlocks
-		MoneyBlocksEntityTypes
+		MoneyBlocksEntities
+		PixelPayItems
 		PixelPayItemGroup.initialize()
 	}
 }

@@ -2,6 +2,8 @@ package fr.gallonemilien.block
 
 
 import com.mojang.serialization.MapCodec
+import fr.gallonemilien.block.entity.ATMEntity
+import fr.gallonemilien.block.entity.MoneyBlocksEntities
 import net.minecraft.block.*
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.BlockEntityTicker
@@ -52,7 +54,7 @@ class ATM : BlockWithEntity(Settings.create().solid()), BlockEntityProvider {
         pos?.let { p -> state?.let { s -> ATMEntity(p,s) } }
 
     override fun <T : BlockEntity> getTicker(world: World, state: BlockState, type: BlockEntityType<T>): BlockEntityTicker<T>? {
-        return validateTicker(type, MoneyBlocksEntityTypes.ATM_BLOCK_ENTITY) { world, pos, state, entity ->
+        return validateTicker(type, MoneyBlocksEntities.ATM_BLOCK_ENTITY) { world, pos, state, entity ->
             entity.tick(world, pos, state, entity as ATMEntity)
         }
     }
