@@ -1,9 +1,9 @@
 package fr.gallonemilien.block.custom
 
 import com.mojang.serialization.MapCodec
-import fr.gallonemilien.block.MoneyBlocks
+import fr.gallonemilien.block.FacingBlockWithEntity
 import fr.gallonemilien.block.entity.MoneyBlocksEntities
-import fr.gallonemilien.block.entity.MoneyPressEntity
+import fr.gallonemilien.block.entity.moneypress.MoneyPressEntity
 import net.minecraft.block.BlockEntityProvider
 import net.minecraft.block.BlockRenderType
 import net.minecraft.block.BlockState
@@ -13,22 +13,18 @@ import net.minecraft.block.entity.BlockEntityTicker
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.util.ActionResult
-import net.minecraft.util.Hand
 import net.minecraft.util.ItemScatterer
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
-class MoneyPress : BlockWithEntity(Settings.create().nonOpaque()), BlockEntityProvider {
+class MoneyPress : FacingBlockWithEntity(Settings.create().nonOpaque()), BlockEntityProvider {
 
     override fun createBlockEntity(pos: BlockPos?, state: BlockState?): BlockEntity =
         MoneyPressEntity(pos!!,state!!)
 
     override fun getCodec(): MapCodec<out BlockWithEntity> =
         createCodec { MoneyPress() }
-
-    override fun getRenderType(state: BlockState?): BlockRenderType =
-        BlockRenderType.MODEL
 
     override fun onStateReplaced(
         state: BlockState,

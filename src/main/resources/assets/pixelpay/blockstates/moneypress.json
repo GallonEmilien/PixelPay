@@ -1,5 +1,8 @@
 {
   "variants": {
-    "": { "model": "pixelpay:block/moneypress" }
+    "facing=north": {"model":  "pixelpay:block/moneypress"},
+    "facing=east": {"model":  "pixelpay:block/moneypress", "y": 90},
+    "facing=south": {"model":  "pixelpay:block/moneypress", "y": 180},
+    "facing=west": {"model":  "pixelpay:block/moneypress", "y":  270}
   }
 }

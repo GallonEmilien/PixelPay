@@ -1,6 +1,7 @@
 package fr.gallonemilien.screen
 
 import com.mojang.blaze3d.systems.RenderSystem
+import fr.gallonemilien.PixelPay
 import fr.gallonemilien.PixelPay.Companion.MOD_ID
 import fr.gallonemilien.block.screen.MoneyPressScreenHandler
 import net.minecraft.client.gui.DrawContext
@@ -17,7 +18,7 @@ class MoneyPressScreen(
 ) : HandledScreen<MoneyPressScreenHandler>(handler, inventory, title) {
 
     companion object {
-        private val TEXTURE = Identifier.of(MOD_ID, "textures/gui/moneypress_gui.png")
+        private val TEXTURE = PixelPay.id( "textures/gui/moneypress_gui.png")
     }
 
     override fun init() {

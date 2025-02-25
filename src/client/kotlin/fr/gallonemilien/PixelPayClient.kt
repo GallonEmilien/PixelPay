@@ -18,5 +18,6 @@ class PixelPayClient : ClientModInitializer {
 		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(),MoneyBlocks.ATM_BLOCK)
 		BlockEntityRendererFactories.register(MoneyBlocksEntities.MONEY_PRESS_ENTITY,::MoneyPressRenderer)
 		HandledScreens.register(ModScreenHandlers.MONEYPRESS_SCREEN_HANDLER,::MoneyPressScreen)
+		Network.register()
 	}
 }

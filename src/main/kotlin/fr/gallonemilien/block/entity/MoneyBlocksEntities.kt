@@ -1,8 +1,10 @@
 package fr.gallonemilien.block.entity
 
+import fr.gallonemilien.PixelPay
 import fr.gallonemilien.PixelPay.Companion.MOD_ID
 import fr.gallonemilien.block.MoneyBlocks
-import net.minecraft.block.entity.BlockEntity
+import fr.gallonemilien.block.entity.atm.ATMEntity
+import fr.gallonemilien.block.entity.moneypress.MoneyPressEntity
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
@@ -19,6 +21,6 @@ object MoneyBlocksEntities {
         register("moneypress_entity", BlockEntityType.Builder.create(::MoneyPressEntity, MoneyBlocks.MONEY_PRESS).build())
 
     private fun <T : BlockEntityType<*>> register(path: String, blockEntityType: T): T =
-        Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier.of(MOD_ID, path), blockEntityType)
+        Registry.register(Registries.BLOCK_ENTITY_TYPE, PixelPay.id( path), blockEntityType)
 
 }

@@ -12,7 +12,7 @@ import software.bernie.geckolib.animation.*
 import software.bernie.geckolib.util.RenderUtil
 import java.util.function.Consumer
 
-class MoneyPressItem(block: Block, settings: Settings) : BlockItem(block, Settings()), GeoItem {
+class MoneyPressItem(block: Block, settings: Settings) : BlockItem(block, settings), GeoItem {
     private val cache : AnimatableInstanceCache = SingletonAnimatableInstanceCache(this)
 
     init {
@@ -21,15 +21,15 @@ class MoneyPressItem(block: Block, settings: Settings) : BlockItem(block, Settin
     }
 
     override fun createGeoRenderer(consumer: Consumer<GeoRenderProvider>?) {
-       /* consumer?.accept(object : GeoRenderProvider {
-            private lateinit var renderer : MoneyPressItemRenderer
+         /*consumer?.accept(object : GeoRenderProvider {
+             private lateinit var renderer : MoneyPressItemRenderer
 
-            override fun getGeoItemRenderer(): net.minecraft.client.render.item.BuiltinModelItemRenderer {
-                if(this.renderer == null)
-                    this.renderer = MoneyPressItemRenderer()
-                return this.renderer
-            }
-        })*/
+             override fun getGeoItemRenderer(): BuiltinModelItemRenderer {
+                 if(this.renderer == null)
+                     this.renderer = MoneyPressItemRenderer()
+                 return this.renderer
+             }
+         })*/
     }
 
 

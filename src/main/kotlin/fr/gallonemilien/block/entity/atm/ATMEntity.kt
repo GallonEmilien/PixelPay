@@ -1,6 +1,7 @@
-package fr.gallonemilien.block.entity
+package fr.gallonemilien.block.entity.atm
 
 
+import fr.gallonemilien.block.entity.MoneyBlocksEntities
 import net.minecraft.block.*
 import net.minecraft.block.entity.BlockEntity
 

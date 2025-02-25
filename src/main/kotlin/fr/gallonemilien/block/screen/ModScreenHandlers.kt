@@ -1,5 +1,6 @@
 package fr.gallonemilien.block.screen
 
+import fr.gallonemilien.PixelPay
 import fr.gallonemilien.PixelPay.Companion.MOD_ID
 import fr.gallonemilien.network.BlockPosPayload
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType
@@ -22,6 +23,6 @@ object ModScreenHandlers {
         factory: (Int, PlayerInventory, D) -> T,
         codec: PacketCodec<in RegistryByteBuf, D>
     ): ExtendedScreenHandlerType<T, D> {
-        return Registry.register(Registries.SCREEN_HANDLER, Identifier.of(MOD_ID,name), ExtendedScreenHandlerType(factory, codec))
+        return Registry.register(Registries.SCREEN_HANDLER, PixelPay.id(name), ExtendedScreenHandlerType(factory, codec))
     }
 }

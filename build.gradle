@@ -19,6 +19,7 @@ repositories {
 			includeGroup("software.bernie.geckolib")
 		}
 	}
+	maven { url 'https://maven.wispforest.io/releases/' }
 }
 
 loom {
@@ -33,7 +34,6 @@ loom {
 
 }
 
-
 dependencies {
 	// To change the versions see the gradle.properties file
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
@@ -45,6 +45,9 @@ dependencies {
 	modImplementation "net.fabricmc:fabric-language-kotlin:${project.fabric_kotlin_version}"
 
 	modImplementation "software.bernie.geckolib:geckolib-fabric-${minecraft_version}:4.7.3"
+
+	modImplementation "io.wispforest:owo-lib:0.12.15+1.21"
+	include "io.wispforest:owo-sentinel:0.12.15+1.21"
 }
 
 processResources {

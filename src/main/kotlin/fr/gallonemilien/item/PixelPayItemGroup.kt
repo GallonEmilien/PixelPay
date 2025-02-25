@@ -1,5 +1,6 @@
 package fr.gallonemilien.item
 
+import fr.gallonemilien.PixelPay
 import fr.gallonemilien.PixelPay.Companion.MOD_ID
 import fr.gallonemilien.block.MoneyBlocks
 import fr.gallonemilien.item.PixelPayItems.pixelPayItems
@@ -23,7 +24,7 @@ object PixelPayItemGroup {
         .build()
 
     fun initialize() {
-        Registry.register(Registries.ITEM_GROUP, Identifier.of(MOD_ID, "general"), PIXELPAY_GROUP)
+        Registry.register(Registries.ITEM_GROUP, PixelPay.id( "general"), PIXELPAY_GROUP)
     }
 }
 

@@ -2,7 +2,7 @@ package fr.gallonemilien.block
 
 
 import com.mojang.serialization.MapCodec
-import fr.gallonemilien.block.entity.ATMEntity
+import fr.gallonemilien.block.entity.atm.ATMEntity
 import fr.gallonemilien.block.entity.MoneyBlocksEntities
 import net.minecraft.block.*
 import net.minecraft.block.entity.BlockEntity
@@ -20,32 +20,8 @@ import net.minecraft.util.shape.VoxelShape
 import net.minecraft.world.BlockView
 import net.minecraft.world.World
 
-class ATM : BlockWithEntity(Settings.create().solid()), BlockEntityProvider {
+class ATM : FacingBlockWithEntity(Settings.create().nonOpaque().solid()), BlockEntityProvider {
 
-
-    companion object {
-        val FACING : DirectionProperty = Properties.HORIZONTAL_FACING
-    }
-
-    private val validDirections = arrayOf(Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST)
-    private fun getDirection(dir: Direction): Direction =
-        if (validDirections.contains(dir)) { dir } else { Direction.NORTH }
-
-    override fun getPlacementState(ctx: ItemPlacementContext): BlockState? =
-        this.defaultState.with(FACING, getDirection(ctx.playerLookDirection.opposite))
-
-
-    override fun rotate(state: BlockState?, rotation: BlockRotation?): BlockState? =
-        state?.let { s -> rotation?.let { r -> s.with(FACING, r.rotate(s.get(FACING))) } }
-
-
-    override fun mirror(state: BlockState?, mirror: BlockMirror?): BlockState? =
-        state?.let { s -> mirror?.let { m -> s.rotate(m.getRotation(s.get(FACING))) } }
-
-
-    override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
-        builder.add(FACING)
-    }
 
     override fun getCodec(): MapCodec<out BlockWithEntity> =
         createCodec { ATM() }
@@ -66,8 +42,5 @@ class ATM : BlockWithEntity(Settings.create().solid()), BlockEntityProvider {
         pos: BlockPos?,
         context: ShapeContext?
     ): VoxelShape = SHAPE
-
-    override fun getRenderType(state: BlockState?): BlockRenderType =
-        BlockRenderType.MODEL
 
 }

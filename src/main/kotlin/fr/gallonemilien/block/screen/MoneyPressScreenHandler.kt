@@ -1,6 +1,6 @@
 package fr.gallonemilien.block.screen
 
-import fr.gallonemilien.block.entity.MoneyPressEntity
+import fr.gallonemilien.block.entity.moneypress.MoneyPressEntity
 import fr.gallonemilien.network.BlockPosPayload
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.player.PlayerEntity

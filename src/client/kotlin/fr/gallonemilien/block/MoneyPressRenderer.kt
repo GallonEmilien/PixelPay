@@ -1,6 +1,6 @@
 package fr.gallonemilien.block
 
-import fr.gallonemilien.block.entity.MoneyPressEntity
+import fr.gallonemilien.block.entity.moneypress.MoneyPressEntity
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory
 import software.bernie.geckolib.renderer.GeoBlockRenderer
 
