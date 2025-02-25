@@ -5,7 +5,6 @@ import fr.gallonemilien.block.FacingBlockWithEntity
 import fr.gallonemilien.block.entity.MoneyBlocksEntities
 import fr.gallonemilien.block.entity.moneypress.MoneyPressEntity
 import net.minecraft.block.BlockEntityProvider
-import net.minecraft.block.BlockRenderType
 import net.minecraft.block.BlockState
 import net.minecraft.block.BlockWithEntity
 import net.minecraft.block.entity.BlockEntity
@@ -36,7 +35,7 @@ class MoneyPress : FacingBlockWithEntity(Settings.create().nonOpaque()), BlockEn
         if (state.block != newState.block) {
             val blockEntity = world.getBlockEntity(pos)
             if (blockEntity is MoneyPressEntity) {
-                ItemScatterer.spawn(world, pos, blockEntity)
+                ItemScatterer.spawn(world, pos, blockEntity.moneyPressInventory)
                 world.updateComparators(pos, this)
             }
             super.onStateReplaced(state, world, pos, newState, moved)

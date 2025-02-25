@@ -19,7 +19,7 @@ class MoneyPressScreenHandler(
     private val propertyDelegate: PropertyDelegate
 ) : ScreenHandler(ModScreenHandlers.MONEYPRESS_SCREEN_HANDLER, syncId) {
 
-    private val inventory: Inventory = blockEntity as Inventory
+    private val inventory: Inventory = (blockEntity as MoneyPressEntity).moneyPressInventory as Inventory
     val blockEntity: MoneyPressEntity = blockEntity as MoneyPressEntity
 
     // Client constructor
@@ -27,15 +27,18 @@ class MoneyPressScreenHandler(
         syncId,
         playerInventory,
         playerInventory.player.world.getBlockEntity(payload.pos)!!,
-        ArrayPropertyDelegate(2)
+        ArrayPropertyDelegate(4)
     )
 
     init {
-        checkSize(inventory, 2)
+        checkSize(inventory, 4)
         inventory.onOpen(playerInventory.player)
 
-        addSlot(Slot(inventory, 0, 80, 11))
-        addSlot(Slot(inventory, 1, 80, 59))
+        addSlot(Slot(inventory, 0, 57, 11))
+        addSlot(Slot(inventory, 1, 80, 11))
+        addSlot(Slot(inventory, 2, 103, 11))
+        addSlot(Slot(inventory, 3, 80, 59))
+
 
         addPlayerInventory(playerInventory)
         addPlayerHotbar(playerInventory)

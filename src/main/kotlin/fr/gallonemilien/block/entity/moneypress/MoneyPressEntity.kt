@@ -13,10 +13,7 @@ import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.Inventories
-import net.minecraft.inventory.SimpleInventory
-import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
-import net.minecraft.item.Items
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.registry.RegistryWrapper
 import net.minecraft.screen.PropertyDelegate
@@ -36,41 +33,12 @@ import software.bernie.geckolib.util.RenderUtil
 
 class MoneyPressEntity(pos: BlockPos, state: BlockState) :
     BlockEntity(MoneyBlocksEntities.MONEY_PRESS_ENTITY, pos, state),
-    GeoBlockEntity, ExtendedScreenHandlerFactory<BlockPosPayload>, ImplementedInventory {
+    GeoBlockEntity, ExtendedScreenHandlerFactory<BlockPosPayload> {
+
 
     companion object {
         val WORKING: RawAnimation = RawAnimation.begin().thenLoop("animation.model.press")
         private val TITLE: Text = Text.translatable("container.$MOD_ID.money_press")
-
-
-        fun craftItem(entity: MoneyPressEntity) {
-            val inventory : SimpleInventory = SimpleInventory(entity.size())
-            for(i in 0..<entity.size())
-                inventory.setStack(i, entity.getStack(i))
-
-            if(hasRecipe(entity)) {
-                entity.removeStack(0,1)
-                entity.setStack(1, ItemStack(PixelPayItems.COPPER_COIN, entity.getStack(1).count+1))
-                entity.resetProgress()
-            }
-        }
-
-        fun hasRecipe(entity: MoneyPressEntity) : Boolean {
-            val inventory = SimpleInventory(entity.size())
-            for(i in 0..<entity.size()) {
-                inventory.setStack(i, entity.getStack(i))
-            }
-            val hasCooperInFirstSlot = entity.getStack(0).item == Items.COPPER_INGOT
-            return hasCooperInFirstSlot && canInsertAmountIntoOutputSlot(inventory) && canInsertItemIntoOutputSlot(inventory, PixelPayItems.COPPER_COIN)
-        }
-
-        fun canInsertItemIntoOutputSlot(inventory: SimpleInventory, output: Item): Boolean {
-           return inventory.getStack(1).item == output || inventory.getStack(1).isEmpty
-        }
-
-        fun canInsertAmountIntoOutputSlot(inventory: SimpleInventory): Boolean =
-            inventory.getStack(1).maxCount > inventory.getStack(1).count
-
     }
 
     var networkDirty : Boolean = false
@@ -78,7 +46,7 @@ class MoneyPressEntity(pos: BlockPos, state: BlockState) :
     private var progress = 0
     private var maxProgress = 15
     private val waitForReset = 45
-    private val moneyPressInventory = MoneyPressInventory(DefaultedList.ofSize(2, ItemStack.EMPTY))
+    val moneyPressInventory = MoneyPressInventory(DefaultedList.ofSize(4, ItemStack.EMPTY))
     private val cache: AnimatableInstanceCache = SingletonAnimatableInstanceCache(this)
 
     fun resetProgress() {
@@ -121,9 +89,6 @@ class MoneyPressEntity(pos: BlockPos, state: BlockState) :
 
     override fun getTick(blockEntity: Any?): Double = RenderUtil.getCurrentTick()
 
-    override fun getItems(): DefaultedList<ItemStack> = moneyPressInventory.inventory
-
-
 
     override fun createMenu(syncId: Int, playerInventory: PlayerInventory?, player: PlayerEntity?): ScreenHandler? {
         return MoneyPressScreenHandler(syncId, playerInventory!!, this, this.propertyDelegate)
@@ -159,7 +124,7 @@ class MoneyPressEntity(pos: BlockPos, state: BlockState) :
     fun tick(world: World, pos: BlockPos, state: BlockState, entity: MoneyPressEntity) {
         if (world.isClient) return
 
-        if(hasRecipe(entity)) {
+        if(moneyPressInventory.getRecipe() != null) {
             entity.progress++
             if(!isWorking) {
                 isWorking = true
@@ -173,7 +138,7 @@ class MoneyPressEntity(pos: BlockPos, state: BlockState) :
             }
 
             if(entity.progress >= entity.waitForReset) {
-                craftItem(entity)
+                if(moneyPressInventory.craftItem()) resetProgress()
             }
         } else {
             entity.resetProgress()
