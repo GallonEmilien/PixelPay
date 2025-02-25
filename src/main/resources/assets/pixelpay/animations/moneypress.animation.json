@@ -3,7 +3,7 @@
 	"animations": {
 		"animation.model.press": {
 			"loop": true,
-			"animation_length": 2.2917,
+			"animation_length": 2.25,
 			"bones": {
 				"bone": {
 					"position": {
@@ -20,7 +20,7 @@
 						"2.0": {
 							"vector": [0, -0.33, 0]
 						},
-						"2.2917": {
+						"2.25": {
 							"vector": [0, 0.06, 0]
 						}
 					}

@@ -65,7 +65,7 @@ class MoneyPress : FacingBlockWithEntity(Settings.create().nonOpaque()), BlockEn
     ): BlockEntityTicker<T>? {
         return validateTicker(
             type, MoneyBlocksEntities.MONEY_PRESS_ENTITY
-        ) { world1, pos, state1, blockEntity -> blockEntity.tick(world1, pos, state1) }
+        ) { world1, pos, state1, blockEntity -> blockEntity.tick(world1, pos, state1, blockEntity) }
     }
 
 }

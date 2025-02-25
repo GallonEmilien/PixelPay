@@ -2,6 +2,7 @@ package fr.gallonemilien.block.entity.moneypress
 
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
+import net.minecraft.item.Items
 import net.minecraft.util.collection.DefaultedList
 
 class MoneyPressInventory(val inventory: DefaultedList<ItemStack>) {
@@ -19,7 +20,8 @@ class MoneyPressInventory(val inventory: DefaultedList<ItemStack>) {
 
     fun addOutputItem(item: ItemStack) {
         val outputStack = getOutputStack()
-        if (outputStack.isEmpty) {
+
+        if (outputStack.isEmpty || outputStack.item == Items.AIR) {
             inventory[OUTPUT_SLOT] = item
         } else {
             outputStack.increment(item.count)
@@ -27,7 +29,7 @@ class MoneyPressInventory(val inventory: DefaultedList<ItemStack>) {
     }
 
     fun canInsertItemIntoOutputSlot(item: Item): Boolean {
-        return getOutputStack().item == item || getOutputStack().isEmpty
+        return getOutputStack().item == item || getOutputStack().isEmpty || getOutputStack().item == Items.AIR
     }
 
     fun canInsertAmountIntoOutputSlot(result: ItemStack): Boolean {
@@ -35,6 +37,6 @@ class MoneyPressInventory(val inventory: DefaultedList<ItemStack>) {
     }
 
     fun isOutputSlotEmptyOrReceivable(): Boolean {
-        return getOutputStack().isEmpty || getOutputStack().count < getOutputStack().maxCount
+        return getOutputStack().isEmpty || getOutputStack().item == Items.AIR || getOutputStack().count < getOutputStack().maxCount
     }
 }
