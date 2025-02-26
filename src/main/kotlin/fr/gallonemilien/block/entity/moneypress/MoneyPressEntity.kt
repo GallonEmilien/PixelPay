@@ -46,7 +46,7 @@ class MoneyPressEntity(pos: BlockPos, state: BlockState) :
     private var progress = 0
     private var maxProgress = 15
     private val waitForReset = 45
-    val moneyPressInventory = MoneyPressInventory(DefaultedList.ofSize(4, ItemStack.EMPTY))
+    val moneyPressInventory = MoneyPressInventory(DefaultedList.ofSize(4, ItemStack.EMPTY), this)
     private val cache: AnimatableInstanceCache = SingletonAnimatableInstanceCache(this)
 
     fun resetProgress() {

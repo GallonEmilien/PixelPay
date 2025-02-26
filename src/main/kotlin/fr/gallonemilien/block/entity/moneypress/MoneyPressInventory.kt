@@ -2,14 +2,17 @@ package fr.gallonemilien.block.entity.moneypress
 
 import fr.gallonemilien.block.entity.ImplementedInventory
 import fr.gallonemilien.item.PixelPayItems
+import fr.gallonemilien.recipe.MoneyPressRecipe
 import net.minecraft.inventory.SimpleInventory
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
+import net.minecraft.recipe.RecipeEntry
 import net.minecraft.recipe.input.RecipeInput
 import net.minecraft.util.collection.DefaultedList
+import java.util.*
 
-class MoneyPressInventory(val inventory: DefaultedList<ItemStack>) : ImplementedInventory, RecipeInput {
+class MoneyPressInventory(val inventory: DefaultedList<ItemStack>, val moneyPressEntity: MoneyPressEntity) : ImplementedInventory, RecipeInput {
 
     private val recipes: Map<List<Item>, ItemStack> = mapOf(
         listOf(Items.COPPER_INGOT, Items.IRON_INGOT, Items.COPPER_INGOT) to ItemStack(PixelPayItems.COPPER_COIN,1),
@@ -20,13 +23,19 @@ class MoneyPressInventory(val inventory: DefaultedList<ItemStack>) : Implemented
     )
 
 
+    private fun getCurrentRecipe() : Optional<RecipeEntry<MoneyPressRecipe>> {
+        val world = moneyPressEntity.world
+        return world!!.recipeManager.getFirstMatch(MoneyPressRecipe.Type.INSTANCE, this, world)
+    }
+
+
     fun getRecipe() : ItemStack? {
-        val ingredients = listOf(
-            getStack(0).item,
-            getStack(1).item,
-            getStack(2).item
-        )
-        return recipes[ingredients]
+        val recipe : Optional<RecipeEntry<MoneyPressRecipe>> = getCurrentRecipe()
+        return if(recipe.isPresent) {
+            recipe.get().value.output
+        } else {
+            null
+        }
     }
 
     fun craftItem() : Boolean {
@@ -37,7 +46,6 @@ class MoneyPressInventory(val inventory: DefaultedList<ItemStack>) : Implemented
 
 
         if(recipeResult != null) {
-            println(canInsertItemIntoOutputSlot(inventory, recipeResult.item))
             if(canInsertItemIntoOutputSlot(inventory, recipeResult.item)
                 && canInsertAmountIntoOutputSlot(inventory)) {
                 this.removeStack(0,1)

@@ -1,0 +1,12 @@
+{
+  "type": "pixelpay:moneypress",
+  "ingredients": [
+    { "item": "minecraft:gold_ingot" },
+    { "item": "pixelpay:copper_coin" },
+    { "item": "minecraft:gold_ingot" }
+  ],
+  "result": {
+    "id": "pixelpay:gold_coin",
+    "count": 1
+  }
+}

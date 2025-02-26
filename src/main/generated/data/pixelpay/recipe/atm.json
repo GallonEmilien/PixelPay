@@ -9,7 +9,7 @@
       "item": "minecraft:glass_pane"
     },
     "L": {
-      "item": "minecraft:oak_log"
+      "tag": "minecraft:logs"
     },
     "R": {
       "item": "minecraft:redstone_block"

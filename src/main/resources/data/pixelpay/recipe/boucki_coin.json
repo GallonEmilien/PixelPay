@@ -1,0 +1,12 @@
+{
+  "type": "pixelpay:moneypress",
+  "ingredients": [
+    { "item": "minecraft:nether_star" },
+    { "item": "pixelpay:emerald_coin" },
+    { "item": "minecraft:nether_star" }
+  ],
+  "result": {
+    "id": "pixelpay:boucki_coin",
+    "count": 1
+  }
+}

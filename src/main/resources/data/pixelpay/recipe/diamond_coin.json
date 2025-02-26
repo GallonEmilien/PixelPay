@@ -1,0 +1,12 @@
+{
+  "type": "pixelpay:moneypress",
+  "ingredients": [
+    { "item": "minecraft:diamond" },
+    { "item": "pixelpay:gold_coin" },
+    { "item": "minecraft:diamond" }
+  ],
+  "result": {
+    "id": "pixelpay:diamond_coin",
+    "count": 1
+  }
+}

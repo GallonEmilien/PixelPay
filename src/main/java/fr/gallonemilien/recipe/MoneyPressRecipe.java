@@ -1,14 +1,10 @@
 package fr.gallonemilien.recipe;
 
-import com.jcraft.jogg.Packet;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import fr.gallonemilien.block.entity.moneypress.MoneyPressInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtElement;
-import net.minecraft.nbt.NbtIo;
-import net.minecraft.network.PacketByteBuf;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
@@ -16,7 +12,6 @@ import net.minecraft.recipe.*;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.World;
-
 import java.util.List;
 
 public class MoneyPressRecipe implements Recipe<MoneyPressInventory> {
@@ -34,7 +29,9 @@ public class MoneyPressRecipe implements Recipe<MoneyPressInventory> {
         if(world.isClient()) {
             return false;
         }
-        return recipeItems.getFirst().test(input.getStack(0));
+        return     recipeItems.get(0).test(input.getStack(0))
+                && recipeItems.get(1).test(input.getStack(1))
+                && recipeItems.get(2).test(input.getStack(2));
     }
 
     @Override
