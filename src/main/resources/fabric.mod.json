@@ -29,6 +29,12 @@
 				"value": "fr.gallonemilien.PixelPayClient",
 				"adapter": "kotlin"
 			}
+		],
+		"rei_client": [
+			{
+				"value": "fr.gallonemilien.compat.PixelPayREIClientPlugin",
+				"adapter": "kotlin"
+			}
 		]
 	},
 	"mixins": [

@@ -25,6 +25,10 @@ repositories {
 	}
 	maven { url 'https://maven.wispforest.io/releases/' }
 
+	repositories {
+		maven { url "https://maven.shedaniel.me" }
+	}
+
 }
 
 loom {
@@ -53,6 +57,9 @@ dependencies {
 
 	modImplementation "io.wispforest:owo-lib:0.12.15+1.21"
 	include "io.wispforest:owo-sentinel:0.12.15+1.21"
+
+	modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:${project.rei_version}"
+	modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}"
 }
 
 processResources {
