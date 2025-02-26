@@ -9,6 +9,6 @@ public class NetworkContent {
     public static final OwoNetChannel NET_CHANNEL = OwoNetChannel.create(PixelPay.Companion.id("pixelpay_net"));
 
     // Server -> Client
-    public record MachineSyncPacket(BlockPos position, boolean isWorking) {
+    public record MachineSyncPacket(BlockPos position, boolean isWorking, Integer progress) {
     }
 }

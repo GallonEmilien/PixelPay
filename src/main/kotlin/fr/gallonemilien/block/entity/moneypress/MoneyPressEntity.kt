@@ -35,24 +35,21 @@ class MoneyPressEntity(pos: BlockPos, state: BlockState) :
     BlockEntity(MoneyBlocksEntities.MONEY_PRESS_ENTITY, pos, state),
     GeoBlockEntity, ExtendedScreenHandlerFactory<BlockPosPayload> {
 
-
     companion object {
-        val WORKING: RawAnimation = RawAnimation.begin().thenLoop("animation.model.press")
         private val TITLE: Text = Text.translatable("container.$MOD_ID.money_press")
     }
 
-    var networkDirty : Boolean = false
-    var isWorking : Boolean = false
+    private var networkDirty : Boolean = false
+    private var isWorking : Boolean = false
     private var progress = 0
     private var maxProgress = 15
     private val waitForReset = 45
     val moneyPressInventory = MoneyPressInventory(DefaultedList.ofSize(4, ItemStack.EMPTY), this)
     private val cache: AnimatableInstanceCache = SingletonAnimatableInstanceCache(this)
 
-    fun resetProgress() {
+    private fun resetProgress() {
         this.progress = 0
     }
-
 
     private val propertyDelegate = object : PropertyDelegate {
         override fun get(index: Int) = when (index) {
@@ -77,9 +74,10 @@ class MoneyPressEntity(pos: BlockPos, state: BlockState) :
 
     private fun <T : GeoAnimatable> predicate(tAnimationState : AnimationState<T>) : PlayState{
         if(isWorking) {
-            tAnimationState.controller.setAnimation(
-                RawAnimation.begin().then("animation.model.press", Animation.LoopType.LOOP)
-            )
+            if(progress == 0)
+                tAnimationState.controller.setAnimation(
+                    RawAnimation.begin().then("animation.model.press", Animation.LoopType.LOOP)
+                )
             return PlayState.CONTINUE
         }
         return PlayState.STOP
@@ -98,12 +96,14 @@ class MoneyPressEntity(pos: BlockPos, state: BlockState) :
         super.writeNbt(nbt, registryLookup)
         Inventories.writeNbt(nbt, moneyPressInventory.inventory,false, registryLookup)
         nbt?.putInt("moneypress.progress", progress)
+        nbt?.putBoolean("moneypress.isWorking", isWorking)
     }
 
     override fun readNbt(nbt: NbtCompound?, registryLookup: RegistryWrapper.WrapperLookup?) {
         Inventories.readNbt(nbt, moneyPressInventory.inventory, registryLookup)
         super.readNbt(nbt, registryLookup)
         progress = nbt?.getInt("moneypress.progress") ?: 0
+        isWorking = nbt?.getBoolean("moneypress.isWorking") ?: false
     }
 
     override fun getDisplayName(): Text = TITLE
@@ -125,12 +125,12 @@ class MoneyPressEntity(pos: BlockPos, state: BlockState) :
         if (world.isClient) return
 
         if(moneyPressInventory.moneyPressRecipeInput.getRecipe() != null) {
+            markDirty()
             entity.progress++
             if(!isWorking) {
                 isWorking = true
-                markDirty()
+
             }
-            markDirty(world, pos, state)
             world.updateListeners(pos, state, state, 3)
             if (progress == maxProgress) {
                 world.playSound(null, pos, net.minecraft.sound.SoundEvents.ENTITY_ITEM_BREAK,
@@ -144,9 +144,8 @@ class MoneyPressEntity(pos: BlockPos, state: BlockState) :
             entity.resetProgress()
             if(isWorking) {
                 isWorking = false
-                markDirty()
             }
-            markDirty(world, pos, state)
+            markDirty()
             world.updateListeners(pos, state, state, 3)
         }
 
@@ -158,11 +157,12 @@ class MoneyPressEntity(pos: BlockPos, state: BlockState) :
 
     private fun updateNetwork() {
         if(!networkDirty) return
-        NetworkContent.NET_CHANNEL.serverHandle(this).send(NetworkContent.MachineSyncPacket(pos,isWorking))
+        NetworkContent.NET_CHANNEL.serverHandle(this).send(NetworkContent.MachineSyncPacket(pos,isWorking,progress))
         networkDirty = false
     }
 
     fun handleNetworkEntry(message: NetworkContent.MachineSyncPacket) {
         this.isWorking = message.isWorking
+        this.progress = message.progress
     }
 }
