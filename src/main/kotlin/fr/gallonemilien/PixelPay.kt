@@ -6,6 +6,7 @@ import fr.gallonemilien.block.entity.moneypress.MoneyPressEntity
 import fr.gallonemilien.block.screen.ModScreenHandlers
 import fr.gallonemilien.item.PixelPayItems
 import fr.gallonemilien.item.PixelPayItemGroup
+import fr.gallonemilien.recipe.ModRecipes
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
 import net.minecraft.util.Identifier
@@ -24,5 +25,6 @@ class PixelPay : ModInitializer {
 		PixelPayItems
 		PixelPayItemGroup.initialize()
 		ModScreenHandlers
+		ModRecipes.registerRecipes()
 	}
 }

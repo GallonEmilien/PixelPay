@@ -6,26 +6,10 @@ import net.minecraft.inventory.SimpleInventory
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
+import net.minecraft.recipe.input.RecipeInput
 import net.minecraft.util.collection.DefaultedList
 
-class MoneyPressInventory(val inventory: DefaultedList<ItemStack>) : ImplementedInventory {
-    companion object {
-        const val INPUT_SLOT = 0
-        const val OUTPUT_SLOT = 1
-    }
-
-    fun getInputStack(): ItemStack = inventory[INPUT_SLOT]
-    fun getOutputStack(): ItemStack = inventory[OUTPUT_SLOT]
-
-    fun addOutputItem(item: ItemStack) {
-        val outputStack = getOutputStack()
-
-        if (outputStack.isEmpty || outputStack.item == Items.AIR) {
-            inventory[OUTPUT_SLOT] = item
-        } else {
-            outputStack.increment(item.count)
-        }
-    }
+class MoneyPressInventory(val inventory: DefaultedList<ItemStack>) : ImplementedInventory, RecipeInput {
 
     private val recipes: Map<List<Item>, ItemStack> = mapOf(
         listOf(Items.COPPER_INGOT, Items.IRON_INGOT, Items.COPPER_INGOT) to ItemStack(PixelPayItems.COPPER_COIN,1),
@@ -76,4 +60,17 @@ class MoneyPressInventory(val inventory: DefaultedList<ItemStack>) : Implemented
         inventory.getStack(3).maxCount > inventory.getStack(3).count
 
     override fun getItems(): DefaultedList<ItemStack> = this.inventory
+
+
+    override fun getStackInSlot(slot: Int): ItemStack {
+        return if (slot in 0 until inventory.size) inventory[slot] else ItemStack.EMPTY
+    }
+
+    override fun getSize(): Int {
+        return inventory.size
+    }
+
+    override fun isEmpty(): Boolean {
+        return inventory.all { it.isEmpty }
+    }
 }

@@ -14,7 +14,6 @@ import net.minecraft.world.World
 class ATMEntity(pos: BlockPos, state: BlockState) : BlockEntity(MoneyBlocksEntities.ATM_BLOCK_ENTITY, pos, state) {
     fun tick(world: World?, blockPos: BlockPos?, blockState: BlockState?, atmEntityType: ATMEntity?) {
         world?.players?.forEach {
-            it.playSound(SoundEvents.BLOCK_LAVA_POP)
         }
     }
 }

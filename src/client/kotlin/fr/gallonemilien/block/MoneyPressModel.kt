@@ -5,7 +5,7 @@ import fr.gallonemilien.block.entity.moneypress.MoneyPressEntity
 import net.minecraft.util.Identifier
 import software.bernie.geckolib.model.GeoModel
 
-class MoneyPressModel : GeoModel<MoneyPressEntity>() {
+class MoneyPressModel(): GeoModel<MoneyPressEntity>() {
 
     override fun getModelResource(p0: MoneyPressEntity?): Identifier =
         PixelPay.id( "geo/moneypress.geo.json")

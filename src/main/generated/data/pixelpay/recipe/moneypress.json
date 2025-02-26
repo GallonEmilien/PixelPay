@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "A": {
+      "item": "minecraft:andesite"
+    },
+    "B": {
+      "item": "minecraft:iron_block"
+    },
+    "L": {
+      "item": "minecraft:oak_log"
+    },
+    "P": {
+      "item": "minecraft:piston"
+    }
+  },
+  "pattern": [
+    "AAA",
+    "LPL",
+    "LBL"
+  ],
+  "result": {
+    "count": 1,
+    "id": "pixelpay:moneypress"
+  }
+}

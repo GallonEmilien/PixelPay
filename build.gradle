@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '1.10-SNAPSHOT'
+	id 'fabric-loom' version '1.8-SNAPSHOT'
 	id 'maven-publish'
 	id "org.jetbrains.kotlin.jvm" version "2.1.10"
 }
@@ -11,6 +11,10 @@ base {
 	archivesName = project.archives_base_name
 }
 
+fabricApi {
+	configureDataGeneration()
+}
+
 repositories {
 	maven {
 		name = 'GeckoLib'
@@ -20,6 +24,7 @@ repositories {
 		}
 	}
 	maven { url 'https://maven.wispforest.io/releases/' }
+
 }
 
 loom {
@@ -44,7 +49,7 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 	modImplementation "net.fabricmc:fabric-language-kotlin:${project.fabric_kotlin_version}"
 
-	modImplementation "software.bernie.geckolib:geckolib-fabric-${minecraft_version}:4.7.3"
+	modImplementation "software.bernie.geckolib:geckolib-fabric-${minecraft_version}:${project.gecko_version}"
 
 	modImplementation "io.wispforest:owo-lib:0.12.15+1.21"
 	include "io.wispforest:owo-sentinel:0.12.15+1.21"

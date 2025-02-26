@@ -20,7 +20,7 @@ import net.minecraft.util.shape.VoxelShape
 import net.minecraft.world.BlockView
 import net.minecraft.world.World
 
-class ATM : FacingBlockWithEntity(Settings.create().nonOpaque().solid()), BlockEntityProvider {
+class ATM : FacingBlockWithEntity(Settings.create().nonOpaque().solid().strength(2.0f).hardness(2.0f)), BlockEntityProvider {
 
 
     override fun getCodec(): MapCodec<out BlockWithEntity> =

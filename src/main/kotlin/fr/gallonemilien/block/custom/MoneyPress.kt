@@ -17,7 +17,7 @@ import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
-class MoneyPress : FacingBlockWithEntity(Settings.create().nonOpaque()), BlockEntityProvider {
+class MoneyPress : FacingBlockWithEntity(Settings.create().nonOpaque().strength(2.0f).hardness(2.0f)), BlockEntityProvider {
 
     override fun createBlockEntity(pos: BlockPos?, state: BlockState?): BlockEntity =
         MoneyPressEntity(pos!!,state!!)

@@ -68,6 +68,6 @@
   }
 },
   "textures": {
-    "particle": "block/texture"
+    "particle": "pixelpay:block/andesite_casing"
   }
 }
