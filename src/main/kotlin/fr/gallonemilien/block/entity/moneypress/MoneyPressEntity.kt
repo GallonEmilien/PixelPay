@@ -124,7 +124,7 @@ class MoneyPressEntity(pos: BlockPos, state: BlockState) :
     fun tick(world: World, pos: BlockPos, state: BlockState, entity: MoneyPressEntity) {
         if (world.isClient) return
 
-        if(moneyPressInventory.getRecipe() != null) {
+        if(moneyPressInventory.moneyPressRecipeInput.getRecipe() != null) {
             entity.progress++
             if(!isWorking) {
                 isWorking = true
@@ -138,7 +138,7 @@ class MoneyPressEntity(pos: BlockPos, state: BlockState) :
             }
 
             if(entity.progress >= entity.waitForReset) {
-                if(moneyPressInventory.craftItem()) resetProgress()
+                if(moneyPressInventory.moneyPressRecipeInput.craftItem()) resetProgress()
             }
         } else {
             entity.resetProgress()

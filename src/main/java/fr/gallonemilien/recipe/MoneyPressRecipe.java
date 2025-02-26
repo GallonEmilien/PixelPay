@@ -3,7 +3,6 @@ package fr.gallonemilien.recipe;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import fr.gallonemilien.block.entity.moneypress.MoneyPressInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
@@ -14,7 +13,7 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.World;
 import java.util.List;
 
-public class MoneyPressRecipe implements Recipe<MoneyPressInventory> {
+public class MoneyPressRecipe implements Recipe<MoneyPressRecipeInput> {
     private final ItemStack output;
     private final List<Ingredient> recipeItems;
 
@@ -25,17 +24,17 @@ public class MoneyPressRecipe implements Recipe<MoneyPressInventory> {
 
 
     @Override
-    public boolean matches(MoneyPressInventory input, World world) {
+    public boolean matches(MoneyPressRecipeInput input, World world) {
         if(world.isClient()) {
             return false;
         }
-        return     recipeItems.get(0).test(input.getStack(0))
-                && recipeItems.get(1).test(input.getStack(1))
-                && recipeItems.get(2).test(input.getStack(2));
+        return     recipeItems.get(0).test(input.getMoneyPressInventory().getStack(0))
+                && recipeItems.get(1).test(input.getMoneyPressInventory().getStack(1))
+                && recipeItems.get(2).test(input.getMoneyPressInventory().getStack(2));
     }
 
     @Override
-    public ItemStack craft(MoneyPressInventory input, RegistryWrapper.WrapperLookup lookup) {
+    public ItemStack craft(MoneyPressRecipeInput input, RegistryWrapper.WrapperLookup lookup) {
         return output;
     }
 

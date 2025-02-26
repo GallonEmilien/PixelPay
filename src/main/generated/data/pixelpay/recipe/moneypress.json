@@ -9,7 +9,7 @@
       "item": "minecraft:iron_block"
     },
     "L": {
-      "item": "minecraft:oak_log"
+      "tag": "minecraft:logs"
     },
     "P": {
       "item": "minecraft:piston"
