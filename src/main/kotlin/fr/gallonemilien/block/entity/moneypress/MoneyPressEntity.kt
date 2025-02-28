@@ -1,7 +1,7 @@
 package fr.gallonemilien.block.entity.moneypress
 
-import fr.gallonemilien.NetworkContent
 import fr.gallonemilien.PixelPay.Companion.MOD_ID
+import fr.gallonemilien.ServerNetwork
 import fr.gallonemilien.block.entity.MoneyBlocksEntities
 import fr.gallonemilien.block.entity.inventory.MoneyPressInventory
 import fr.gallonemilien.block.screen.MoneyPressScreenHandler
@@ -156,11 +156,11 @@ class MoneyPressEntity(pos: BlockPos, state: BlockState) :
 
     private fun updateNetwork() {
         if(!networkDirty) return
-        NetworkContent.NET_CHANNEL.serverHandle(this).send(NetworkContent.MachineSyncPacket(pos,isWorking,progress))
+        ServerNetwork.NET_CHANNEL.serverHandle(this).send(ServerNetwork.MachineSyncPacket(pos,isWorking,progress))
         networkDirty = false
     }
 
-    fun handleNetworkEntry(message: NetworkContent.MachineSyncPacket) {
+    fun handleNetworkEntry(message: ServerNetwork.MachineSyncPacket) {
         this.isWorking = message.isWorking
         this.progress = message.progress
     }

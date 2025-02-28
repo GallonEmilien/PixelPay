@@ -1,13 +1,10 @@
 package fr.gallonemilien.screen
 
 import com.mojang.blaze3d.systems.RenderSystem
-import fr.gallonemilien.NetworkContent
 import fr.gallonemilien.PixelPay
+import fr.gallonemilien.ServerNetwork
 import fr.gallonemilien.block.screen.ATMScreenHandler
-import fr.gallonemilien.item.coin.Coin
 import fr.gallonemilien.item.coin.CoinType
-import fr.gallonemilien.network.BlockPosPayload
-import io.netty.buffer.Unpooled
 import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.ingame.HandledScreen
 import net.minecraft.client.gui.widget.ButtonWidget
@@ -16,9 +13,6 @@ import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.text.Text
 import net.minecraft.item.ItemStack
 import net.minecraft.client.MinecraftClient
-import net.minecraft.network.PacketByteBuf
-import net.minecraft.network.packet.c2s.common.CustomPayloadC2SPacket
-import net.minecraft.util.math.BlockPos
 
 class ATMScreen(
     handler: ATMScreenHandler,
@@ -77,7 +71,7 @@ class ATMScreen(
 
     private fun deposit() {
         println("Dépot effectué !")
-        NetworkContent.NET_CHANNEL.clientHandle().send(NetworkContent.DepositCoinPacket(handler.blockEntity.pos))
+        ServerNetwork.NET_CHANNEL.clientHandle().send(ServerNetwork.DepositCoinPacket(handler.blockEntity.pos))
     }
 
     private fun withdraw() {

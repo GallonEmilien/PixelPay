@@ -1,12 +1,10 @@
 package fr.gallonemilien.network
 
 import fr.gallonemilien.PixelPay
-import fr.gallonemilien.PixelPay.Companion.MOD_ID
 import net.minecraft.network.RegistryByteBuf
 import net.minecraft.network.codec.PacketCodec
 import net.minecraft.network.packet.CustomPayload
 import net.minecraft.network.packet.CustomPayload.Id
-import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
 
 data class BlockPosPayload(val pos : BlockPos) : CustomPayload {

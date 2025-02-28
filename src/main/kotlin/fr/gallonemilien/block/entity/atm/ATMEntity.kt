@@ -19,7 +19,6 @@ import net.minecraft.text.Text
 import net.minecraft.util.collection.DefaultedList
 
 import net.minecraft.util.math.BlockPos
-import java.util.*
 
 class ATMEntity(pos: BlockPos, state: BlockState) : BlockEntity(MoneyBlocksEntities.ATM_BLOCK_ENTITY, pos, state),
     ExtendedScreenHandlerFactory<BlockPosPayload> {
