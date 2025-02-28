@@ -18,5 +18,4 @@ data class BlockPosPayload(val pos : BlockPos) : CustomPayload {
     }
 
     override fun getId(): Id<out CustomPayload> = ID
-
 }

@@ -1,7 +1,7 @@
 package fr.gallonemilien.recipe
 
+import fr.gallonemilien.block.entity.inventory.MoneyPressInventory
 import fr.gallonemilien.block.entity.moneypress.MoneyPressEntity
-import fr.gallonemilien.block.entity.moneypress.MoneyPressInventory
 import net.minecraft.inventory.SimpleInventory
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack

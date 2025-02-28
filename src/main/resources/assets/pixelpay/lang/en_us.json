@@ -7,5 +7,6 @@
   "item.pixelpay.boucki_coin": "Bouckoin",
   "block.pixelpay.atm": "ATM",
   "container.pixelpay.money_press": "Money Press",
-  "block.pixelpay.moneypress": "Money Press"
+  "block.pixelpay.moneypress": "Money Press",
+  "screen.pixelpay.depositButton": "Deposit"
 }

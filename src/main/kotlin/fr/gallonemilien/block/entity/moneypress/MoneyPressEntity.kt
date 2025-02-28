@@ -2,10 +2,9 @@ package fr.gallonemilien.block.entity.moneypress
 
 import fr.gallonemilien.NetworkContent
 import fr.gallonemilien.PixelPay.Companion.MOD_ID
-import fr.gallonemilien.block.entity.ImplementedInventory
 import fr.gallonemilien.block.entity.MoneyBlocksEntities
+import fr.gallonemilien.block.entity.inventory.MoneyPressInventory
 import fr.gallonemilien.block.screen.MoneyPressScreenHandler
-import fr.gallonemilien.item.PixelPayItems
 import fr.gallonemilien.network.BlockPosPayload
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory
 import net.minecraft.block.BlockState
@@ -44,7 +43,7 @@ class MoneyPressEntity(pos: BlockPos, state: BlockState) :
     private var progress = 0
     private var maxProgress = 15
     private val waitForReset = 45
-    val moneyPressInventory = MoneyPressInventory(DefaultedList.ofSize(4, ItemStack.EMPTY), this)
+    val moneyPressInventory = MoneyPressInventory(DefaultedList.ofSize(4, ItemStack.EMPTY),this)
     private val cache: AnimatableInstanceCache = SingletonAnimatableInstanceCache(this)
 
     private fun resetProgress() {
@@ -88,9 +87,9 @@ class MoneyPressEntity(pos: BlockPos, state: BlockState) :
     override fun getTick(blockEntity: Any?): Double = RenderUtil.getCurrentTick()
 
 
-    override fun createMenu(syncId: Int, playerInventory: PlayerInventory?, player: PlayerEntity?): ScreenHandler? {
-        return MoneyPressScreenHandler(syncId, playerInventory!!, this, this.propertyDelegate)
-    }
+    override fun createMenu(syncId: Int, playerInventory: PlayerInventory?, player: PlayerEntity?): ScreenHandler =
+         MoneyPressScreenHandler(syncId, playerInventory!!, this, this.propertyDelegate)
+
 
     override fun writeNbt(nbt: NbtCompound?, registryLookup: RegistryWrapper.WrapperLookup?) {
         super.writeNbt(nbt, registryLookup)
