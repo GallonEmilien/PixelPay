@@ -24,6 +24,7 @@ PixelPay is a Minecraft mod that introduces an economic system and objects for m
 ## Dependencies
 
 - Fabric 1.21.1 0.16.10
+- Fabric Kotlin
 - Geckolib
 - Wisp Forst - Owo Lib
   
