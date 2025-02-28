@@ -1,6 +1,7 @@
-# PixelPay - Currency Mod for Minecraft
+# PixelPay - Currency Mod for Minecraft 
 
 PixelPay is a Minecraft mod that introduces an economic system and objects for managing currencies in the game. This mod allows players to use virtual money for buying, selling, and managing their resources in the world of Minecraft.
+(still in dev, no release avaible, it's mainly a leveling-up project so there is no objectives at all)
 
 ## Features
 
@@ -23,8 +24,9 @@ PixelPay is a Minecraft mod that introduces an economic system and objects for m
 ## Dependencies
 
 - Fabric 1.21.1 0.16.10
+- Fabric Kotlin
 - Geckolib
-- Wisp Forst
+- Wisp Forst - Owo Lib
   
 ## License
 
