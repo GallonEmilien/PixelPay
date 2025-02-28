@@ -16,8 +16,12 @@ public class ServerNetwork {
     public record MachineSyncPacket(BlockPos position, boolean isWorking, Integer progress) {}
     public record DepositCoinPacket(BlockPos position) {}
     public record WithdrawCoinPacket(BlockPos position, CoinType type, int amount) {}
-    public record BalancePacket(CoinType type) {}
+    public record BalancePacket(BlockPos position, CoinType type) {}
     public record DataSyncPacket(PlayerCoinData data) {}
+
+    public record BalancePacketResponse(String msg, CoinType type, Integer amount, BlockPos pos) {}
+    public record WithdrawCoinPacketResponse(String msg) {}
+    public record DepositCoinPacketResponse(String msg) {}
 
     public static void register() {
         NET_CHANNEL.registerServerbound(ServerNetwork.DepositCoinPacket.class, (DepositCoinPacketLogic.INSTANCE::action));

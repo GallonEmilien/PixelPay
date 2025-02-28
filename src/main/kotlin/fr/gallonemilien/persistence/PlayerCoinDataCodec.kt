@@ -17,17 +17,7 @@ class PlayerCoinDataCodec : StructEndec<DataSyncPacket> {
     ) {
         // Sérialiser le PlayerCoinData contenu dans DataSyncPacket
         val playerCoinData = value?.data ?: return
-        println("ENCODE STRUCT")
-        // Sérialiser la map EnumMap<CoinType, Int> en une liste de paires (clé-valeur)
-        println("ENCODE STRUCT")
-        println("ENCODE STRUCT")
-        println("ENCODE STRUCT")
-        println("ENCODE STRUCT")
-        println("ENCODE STRUCT")
-        println(playerCoinData.dataMap.size)
         playerCoinData.dataMap.forEach { (coinType, amount) ->
-            println("COINTYPE $coinType")
-            println("AMOUNT $amount")
             // Écrire la clé (CoinType) comme String et la valeur (amount) comme Int
             serializer?.writeString(ctx, coinType.name)  // Écrire le nom de l'enum
             serializer?.writeInt(ctx, amount)  // Écrire l'entier associé à la clé

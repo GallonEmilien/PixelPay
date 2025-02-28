@@ -65,20 +65,21 @@ class ATMScreen(
         recalculateIconsPositions()
     }
 
-    private fun depositCoin() {
 
+    private fun updateBalance() {
+        handler.blockEntity.updateBalance()
     }
 
     private fun deposit() {
-        println("Dépot effectué !")
         ServerNetwork.NET_CHANNEL.clientHandle().send(ServerNetwork.DepositCoinPacket(handler.blockEntity.pos))
-        CoinType.entries.forEach{ServerNetwork.NET_CHANNEL.clientHandle().send(ServerNetwork.BalancePacket(it))}
-
+        CoinType.entries.forEach{ServerNetwork.NET_CHANNEL.clientHandle().send(ServerNetwork.BalancePacket(handler.blockEntity.pos,it))}
+        updateBalance()
     }
 
     private fun withdraw(coinType: CoinType) {
         ServerNetwork.NET_CHANNEL.clientHandle().send(ServerNetwork.WithdrawCoinPacket(handler.blockEntity.pos, coinType, 1))
-        CoinType.entries.forEach{ServerNetwork.NET_CHANNEL.clientHandle().send(ServerNetwork.BalancePacket(it))}
+        CoinType.entries.forEach{ServerNetwork.NET_CHANNEL.clientHandle().send(ServerNetwork.BalancePacket(handler.blockEntity.pos,it))}
+        updateBalance()
     }
 
     override fun drawBackground(context: DrawContext, delta: Float, mouseX: Int, mouseY: Int) {
@@ -105,7 +106,6 @@ class ATMScreen(
 
     override fun render(context: DrawContext, mouseX: Int, mouseY: Int, delta: Float) {
         super.render(context, mouseX, mouseY, delta)
-
         // Dessiner les icônes des coins sur les boutons
         coinButtons.forEachIndexed { index, button ->
             // Vérifier si l'index est valide

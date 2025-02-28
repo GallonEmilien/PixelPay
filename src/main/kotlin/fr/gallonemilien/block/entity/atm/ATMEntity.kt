@@ -2,9 +2,12 @@ package fr.gallonemilien.block.entity.atm
 
 
 import fr.gallonemilien.PixelPay.Companion.MOD_ID
+import fr.gallonemilien.ServerNetwork
+import fr.gallonemilien.ServerNetwork.BalancePacketResponse
 import fr.gallonemilien.block.entity.MoneyBlocksEntities
 import fr.gallonemilien.block.entity.inventory.ATMInventory
 import fr.gallonemilien.block.screen.ATMScreenHandler
+import fr.gallonemilien.item.coin.CoinType
 import fr.gallonemilien.network.BlockPosPayload
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory
 import net.minecraft.block.*
@@ -31,6 +34,8 @@ class ATMEntity(pos: BlockPos, state: BlockState) : BlockEntity(MoneyBlocksEntit
     var playerOpeningATM: ServerPlayerEntity? = null
 
     override fun createMenu(syncId: Int, playerInventory: PlayerInventory?, player: PlayerEntity?): ScreenHandler {
+        coinMap.clear()
+        updateBalance()
         if (player is ServerPlayerEntity)
             playerOpeningATM = player
         return ATMScreenHandler(syncId, playerInventory!!, this)
@@ -43,7 +48,20 @@ class ATMEntity(pos: BlockPos, state: BlockState) : BlockEntity(MoneyBlocksEntit
     fun isOpenable() : Boolean =
         playerOpeningATM == null
 
+    val coinMap : HashMap<CoinType, Int> = HashMap()
 
+    fun updateBalance() {
+        if(world!!.isClient)
+            CoinType.entries.forEach {
+                ServerNetwork.NET_CHANNEL.clientHandle()
+                    .send(ServerNetwork.BalancePacket(pos,it))
+            }
+    }
+
+    fun handleNetworkEntry(message: BalancePacketResponse) {
+        coinMap[message.type] = message.amount
+        markDirty()
+    }
 
     override fun getDisplayName(): Text = TITLE
 
