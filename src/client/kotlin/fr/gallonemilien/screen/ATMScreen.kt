@@ -49,7 +49,7 @@ class ATMScreen(
             coinPositions[coinType]!!.recalculatePosition(x,y, backgroundWidth, index)
             val coinSize = 16
             val button = ButtonWidget.builder(Text.of("")) {
-                depositCoin()
+                withdraw(coinType)
             }
             .dimensions(coinPositions[coinType]!!.posX, coinPositions[coinType]!!.posY, coinSize, coinSize)
             .build()
@@ -72,10 +72,13 @@ class ATMScreen(
     private fun deposit() {
         println("Dépot effectué !")
         ServerNetwork.NET_CHANNEL.clientHandle().send(ServerNetwork.DepositCoinPacket(handler.blockEntity.pos))
+        CoinType.entries.forEach{ServerNetwork.NET_CHANNEL.clientHandle().send(ServerNetwork.BalancePacket(it))}
+
     }
 
-    private fun withdraw() {
-        println("Retrait effectué !")
+    private fun withdraw(coinType: CoinType) {
+        ServerNetwork.NET_CHANNEL.clientHandle().send(ServerNetwork.WithdrawCoinPacket(handler.blockEntity.pos, coinType, 1))
+        CoinType.entries.forEach{ServerNetwork.NET_CHANNEL.clientHandle().send(ServerNetwork.BalancePacket(it))}
     }
 
     override fun drawBackground(context: DrawContext, delta: Float, mouseX: Int, mouseY: Int) {

@@ -2,6 +2,7 @@ package fr.gallonemilien.persistence
 
 import fr.gallonemilien.PixelPay.Companion.MOD_ID
 import fr.gallonemilien.item.coin.CoinType
+import net.minecraft.command.argument.EntityArgumentType.getPlayers
 import net.minecraft.entity.LivingEntity
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.registry.RegistryWrapper
@@ -22,12 +23,15 @@ class ServerCoinSaverLoader : PersistentState() {
 
         fun createFromNbt(tag: NbtCompound, registryLookup: RegistryWrapper.WrapperLookup?): ServerCoinSaverLoader {
             val serverCoinSaverLoader = ServerCoinSaverLoader()
+            println(tag.toString())
             val playersNbt = tag.getCompound("players")
+            println(playersNbt.keys.size)
             playersNbt.keys.forEach { key ->
                 val playerCoinData = PlayerCoinData()
                 val playerNbt = playersNbt.getCompound(key)
                 CoinType.entries.forEach { coinType ->
                     val balance = playerNbt.getInt(coinType.name)
+                    println("${coinType.name}: $balance")
                     playerCoinData.dataMap[coinType] = balance
                 }
                 val uuid = UUID.fromString(key)
@@ -62,9 +66,12 @@ class ServerCoinSaverLoader : PersistentState() {
             val playerNbt = NbtCompound()
             playerCoinData.dataMap.forEach { (coinType, balance) ->
                 playerNbt.putInt(coinType.name, balance)
+                println("${coinType.name}: $balance")
             }
             playersNbt.put(uuid.toString(), playerNbt)
         }
-        return playersNbt
+        val playersNbtFull = NbtCompound()
+        playersNbtFull.put("players", playersNbt)
+        return playersNbtFull
     }
 }

@@ -6,8 +6,9 @@ import fr.gallonemilien.block.screen.ModScreenHandlers
 import fr.gallonemilien.item.PixelPayItems
 import fr.gallonemilien.item.PixelPayItemGroup
 import fr.gallonemilien.item.coin.CoinType
-import fr.gallonemilien.network.PersistencePayload
+import fr.gallonemilien.persistence.PlayerCoinData
 import fr.gallonemilien.persistence.PlayerCoinUtils
+import fr.gallonemilien.persistence.ServerCoinSaverLoader
 import fr.gallonemilien.recipe.ModRecipes
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
@@ -33,15 +34,10 @@ class PixelPay : ModInitializer {
 		registerServerState()
 	}
 
-	fun registerServerState() {
-		ServerPlayConnectionEvents.JOIN.register { handler, sender, server ->
-			val data = PacketByteBufs.create()
-			CoinType.entries.forEach { coinType ->
-				data.writeInt(PlayerCoinUtils.getBalance(handler.player,coinType))
-			}
-			server.execute {
-				ServerPlayNetworking.send(handler.player, PersistencePayload(data))
-			}
+	private fun registerServerState() {
+		ServerPlayConnectionEvents.JOIN.register { handler, _, _ ->
+			val playerCoinData : PlayerCoinData = ServerCoinSaverLoader.getPlayerState(handler.player)
+			//ServerNetwork.NET_CHANNEL.serverHandle(handler.player).send(ServerNetwork.DataSyncPacket(playerCoinData))
 		}
 	}
 }

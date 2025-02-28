@@ -36,8 +36,6 @@ class ATMEntity(pos: BlockPos, state: BlockState) : BlockEntity(MoneyBlocksEntit
         return ATMScreenHandler(syncId, playerInventory!!, this)
     }
 
-    fun getPlayerOpeningATM(): ServerPlayerEntity? = playerOpeningATM
-
     fun removePlayer() {
         playerOpeningATM = null
     }

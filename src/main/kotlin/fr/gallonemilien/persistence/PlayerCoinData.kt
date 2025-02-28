@@ -1,8 +1,18 @@
 package fr.gallonemilien.persistence
 
 import fr.gallonemilien.item.coin.CoinType
-import java.util.*
+import kotlin.collections.HashMap
 
-class PlayerCoinData {
-    val dataMap : MutableMap<CoinType, Int> = EnumMap(CoinType::class.java)
+class PlayerCoinData  {
+    var dataMap: HashMap<CoinType, Int> = HashMap()
+
+    constructor() {
+        CoinType.entries.forEach {
+            dataMap[it] = 0
+        }
+    }
+
+    constructor(dataMap: HashMap<CoinType, Int>) {
+        this.dataMap = dataMap
+    }
 }

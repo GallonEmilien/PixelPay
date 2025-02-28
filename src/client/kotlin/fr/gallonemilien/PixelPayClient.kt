@@ -4,6 +4,7 @@ import fr.gallonemilien.block.MoneyBlocks
 import fr.gallonemilien.block.MoneyPressRenderer
 import fr.gallonemilien.block.entity.MoneyBlocksEntities
 import fr.gallonemilien.block.screen.ModScreenHandlers
+import fr.gallonemilien.persistence.PlayerCoinData
 import fr.gallonemilien.screen.ATMScreen
 import fr.gallonemilien.screen.MoneyPressScreen
 import net.fabricmc.api.ClientModInitializer
@@ -12,7 +13,13 @@ import net.minecraft.client.gui.screen.ingame.HandledScreens
 import net.minecraft.client.render.RenderLayer
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories
 
+
 class PixelPayClient : ClientModInitializer {
+
+	companion object {
+		lateinit var playerData : PlayerCoinData
+	}
+
 	override fun onInitializeClient() {
 		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(),MoneyBlocks.ATM_BLOCK)
 		BlockEntityRendererFactories.register(MoneyBlocksEntities.MONEY_PRESS_ENTITY,::MoneyPressRenderer)
